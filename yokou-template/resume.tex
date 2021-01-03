@@ -25,8 +25,8 @@
 
 \section{背景}
 スマートフォンでネットサーフィンをしているとき、
-読んでいる途中のページや動画を保存したいというニーズがある[]。
-そうしたニーズに対応するブックマークアプリはすでに存在する[]。
+読んでいる途中のページや動画を保存したいというニーズがある\cite{example}。
+そうしたニーズに対応するブックマークアプリはすでに存在する\cite{Pocket}。
 
 しかし、既存のブックマークアプリには以下の問題がある。
 \begin{enumerate}
@@ -45,16 +45,45 @@
 
 \section{アプローチ}
 Webページおよび動画のスクロール位置や再生位置を保存・復旧することのできる
-iOSアプリケーションを開発する。
+iOSアプリケーションを開発する\cite{example}。
 
 \section{環境}
-タランチュラ
+\begin{itemize}
+\item Xcode12
+\item Swift5
+\item ECMAScript 2015
+\end{itemize}
 
 \section{実装}
-う
+\subsection{ユーザーフロー}
+ユーザーがこのアプリケーションを使用してWebページ・動画を保存し、
+復旧するまでの主な手順を以下に示した。
+\begin{enumerate}
+\item SafariでWebページや動画を視聴している
+\item 共有ボタンをタップ
+\item 「Shiori」ボタンをタップして保存する
+\item アプリを開くと、視聴していたWebページ・動画が保存されている
+\item 保存したWebページ・動画をタップすると、スクロール位置・再生位置が復旧された状態でWebページ・動画が開かれる
+\end{enumerate}
+
+\subsection{実装詳細}
+上記の機能を実現するため、Appleが提供するApp Extensionの
+一種であるShare Extensionという機能を利用する。
+Share Extensionとは〜〜という機能である。
+Share Extensionを利用してアプリにWebページや動画を保存する際に、
+GetData.jsというJavascriptファイルを実行し、以下の二つのデータを取得する。
+\begin{itemize}
+\item スクロール位置
+\item 動画の再生時間
+\end{itemize}
+
+そして、取得したデータをWebページや動画のメタデータとして保存する。
+ユーザーが保存したWebページや動画をクリックすると、アプリケーション内部で
+ブラウザを開き、スクロール位置や再生位置を復旧させた状態でWebページや動画を開く。
+
 
 \section{評価}
-評価では、開発したアプリケーションが以下の2つの機能を実現できていることを確認する。
+評価のために、開発したアプリケーションが以下の2つの機能を実現できていることを確認する。
 \begin{enumerate}
 \item 保存したWebページのスクロール位置が復旧できること
 \item 保存した動画の再生位置が復旧できること
@@ -62,24 +91,10 @@ iOSアプリケーションを開発する。
 
 \section{結果}
 \subsection{実現できたこと}
+保存したWebページのスクロール位置が復旧できることを証明する
 
-\subsection{実現できていないこと}
+→画像二枚？
 
-\section{記法参考}
-\subsection{hoge}
-小見出し付きの文章．
-
-\begin{enumerate}
-\item 番号付き箇条書き 
-\item 番号付き箇条書き
-\end{enumerate}
-
-\begin{itemize}
-\item 箇条書き
-\item 箇条書き
-\end{itemize}
-
-\subsection{hoge}
 画像を図\ref{sample}に示す。
 
 \begin{figure}[htbp]
@@ -91,8 +106,15 @@ iOSアプリケーションを開発する。
 \end{figure}
 
 
-\bibliography{resume}
+保存した動画の再生位置が復旧できることを証明する
+
+→
+
+\subsection{実現できていないこと}
+a
+
 \bibliographystyle{junsrt}
+\bibliography{resume}
 
 \end{document}
 % end of file
