@@ -88,30 +88,58 @@ GetData.jsというJavascriptファイルを実行し、以下の二つのデー
 \item 保存したWebページのスクロール位置が復旧できること
 \item 保存した動画の再生位置が復旧できること
 \end{enumerate}
+評価の方法として、実際に任意のWebページ・動画を途中までスクロール・再生した上で
+アプリケーションに保存する。保存されたWebページ・動画をアプリケーション内で開き、
+保存したときのスクロール位置・再生位置が復旧するかどうか検証する。
+
+検証には、以下のWebページ・動画を使用した。
+\begin{enumerate}
+\item Webページ: ネットの父・村井純が見る未来＃01／理想だけを追えばいい時代が来る\cite{murai-web-page}
+\item 動画: 「インターネット文明」村井純\cite{murai-video}
+\end{enumerate}
 
 \section{結果}
 \subsection{実現できたこと}
-保存したWebページのスクロール位置が復旧できることを証明する
-
-→画像二枚？
-
-画像を図\ref{sample}に示す。
-
+\subsubsection{保存したWebページのスクロール位置を復旧}
+評価の結果、図\ref{fig:one}, 図\ref{fig:two}のように、保存したWebページのスクロール位置が復旧することを確認できた。
 \begin{figure}[htbp]
-    \begin{center}
-        \includegraphics[width=6cm]{figure1.png}
-        \caption{画像の例}
-        \label{sample}
-    \end{center}
+    \begin{minipage}{0.5\hsize}
+        \begin{center}
+        \includegraphics[width=70mm]{../assets/scroll_position/scroll_position1.png}
+        \end{center}
+        \caption{スクロールしたwebページを保存}
+        \label{fig:one}
+    \end{minipage}
+    \begin{minipage}{0.5\hsize}
+        \begin{center}
+        \includegraphics[width=70mm]{../assets/scroll_position/scroll_position2.png}
+        \end{center}
+        \caption{保存したWebページのスクロール位置が復旧}
+        \label{fig:two}
+    \end{minipage}
 \end{figure}
 
-
-保存した動画の再生位置が復旧できることを証明する
-
-→
+\subsubsection{保存した動画の再生位置が復旧できることを確認}
+評価の結果、図\ref{fig:three}, 図\ref{fig:four}のように、保存した動画の再生位置が復旧することを確認できた。
+\begin{figure}[htbp]
+    \begin{minipage}{0.5\hsize}
+        \begin{center}
+        \includegraphics[width=70mm]{../assets/playback_position/playback_position1.png}
+        \end{center}
+        \caption{再生中の動画を保存}
+        \label{fig:three}
+    \end{minipage}
+    \begin{minipage}{0.5\hsize}
+        \begin{center}
+        \includegraphics[width=70mm]{../assets/playback_position/playback_position2.png}
+        \end{center}
+        \caption{保存した動画の再生位置が復旧}
+        \label{fig:four}
+    \end{minipage}
+\end{figure}
 
 \subsection{実現できていないこと}
-a
+実現できていないことを書く
 
 \bibliographystyle{junsrt}
 \bibliography{resume}
