@@ -3,10 +3,9 @@ Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
 The top-level auxiliary file: resume.aux
 The style file: junsrt.bst
 Database file #1: resume.bib
-Warning--I didn't find a database entry for "net-surfin"
 You've used 7 entries,
             2270 wiz_defined-function locations,
-            563 strings with 4839 characters,
+            562 strings with 4829 characters,
 and the built_in function-call counts, 1061 in all, are:
 = -- 55
 > -- 13
@@ -46,4 +45,3 @@ while$ -- 2
 width$ -- 8
 write$ -- 57
 is.kanji.str$ -- 44
-(There was 1 warning)
