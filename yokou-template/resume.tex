@@ -19,8 +19,7 @@
 \thispagestyle{empty}
 
 \section{背景}
-スマートフォンでネットサーフィンをしているとき、
-読んでいる途中のページや動画を保存したいというニーズがある。
+スマートフォンでネットサーフィンをしているとき、読んでいる途中のページや動画をブックマークしたいというニーズがある。
 そうしたニーズに対応するブックマークアプリはすでに存在する\cite{Pocket}\cite{instapaper}。
 
 しかし、既存のブックマークアプリには以下の問題がある。
@@ -38,9 +37,32 @@
 上記の問題を解決するため、スマートフォンで見ているWebページや動画をどこまで読んでいたか・
 どこまで見ていたかという情報とともに保存し、復旧できるようにすることを目指す。
 
-\section{アプローチ}
+\section{目標}
 Webページおよび動画のスクロール位置や再生位置を保存・復旧することのできる
 iOSアプリケーションを開発する\cite{shiori-web-for-safari}。
+
+\section{先行研究}
+
+\begin{center}
+    \scalebox{0.7}{
+    \begin{tabular}{|p{4cm}|p{2.5cm}|p{2.5cm}|p{2.5cm}|}
+    \hline
+     & safariのリーディングリスト & pocket & instapaper \\
+    \hline
+    Webページをブックマークする機能 & ◯ & ◯ & ◯ \\
+    \hline
+    動画をブックマークする機能 & ◯ & ◯ & ◯ \\
+    \hline
+    ブックマークしたWebページのスクロール位置を復旧する機能 & × & × & × \\
+    \hline
+    ブックマークした動画の再生位置を復旧する機能 & × & × & × \\
+    \hline
+    \end{tabular}
+    }
+\end{center}
+
+\section{アプローチ}
+
 
 \section{環境}
 \begin{itemize}
@@ -50,18 +72,35 @@ iOSアプリケーションを開発する\cite{shiori-web-for-safari}。
 \end{itemize}
 
 \section{実装}
-\subsection{ユーザーフロー}
+\subsection{ユーザーがWebページを保存するまでの手順}
 ユーザーがこのアプリケーションを使用してWebページ・動画を保存し、
 復旧するまでの主な手順を以下に示した。
 \begin{enumerate}
-\item SafariでWebページや動画を視聴している
-\item 共有ボタンをタップ
-\item 「Shiori」ボタンをタップして保存する
-\item アプリを開くと、視聴していたWebページ・動画が保存されている
-\item 保存したWebページ・動画をタップすると、スクロール位置・再生位置が復旧された状態でWebページ・動画が開かれる
+\item SafariでWebページや動画を視聴している(図\ref{fig:one})
+\item 共有ボタンをタップ(図\ref{fig:one})
+\item 「Shiori」ボタンをタップして保存する(図\ref{fig:two})
+\item アプリを開くと、視聴していたWebページ・動画が保存されている(図\ref{fig:two})
+\item 保存したWebページ・動画をタップすると、スクロール位置・再生位置が復旧された状態でWebページ・動画が開かれる(図\ref{fig:two})
 \end{enumerate}
 
-\subsection{実装詳細}
+\begin{figure}[htbp]
+    \begin{minipage}{0.5\hsize}
+        \begin{center}
+        \includegraphics[width=70mm]{../assets/scroll_position/scroll_position1.png}
+        \end{center}
+        \caption{}
+        \label{fig:one}
+    \end{minipage}
+    \begin{minipage}{0.5\hsize}
+        \begin{center}
+        \includegraphics[width=70mm]{../assets/scroll_position/scroll_position2.png}
+        \end{center}
+        \caption{}
+        \label{fig:two}
+    \end{minipage}
+\end{figure}
+
+\subsection{プログラム間でのデータフロー}
 上記の機能を実現するため、Appleが提供するApp Extension\cite{App-Extension}の
 一種であるShare Extension\cite{Share-Extension}という機能を利用する。
 Share Extensionとは、iPhoneで開いているWebページや動画を
@@ -97,46 +136,14 @@ Javascriptコードを実行し、以下の二つのデータを取得する。
 
 \section{結果}
 \subsection{実現できたこと}
-\subsubsection{保存したWebページのスクロール位置を復旧}
-評価の結果、図\ref{fig:one}, 図\ref{fig:two}のように、保存したWebページのスクロール位置が復旧することを確認できた。
-\begin{figure}[htbp]
-    \begin{minipage}{0.5\hsize}
-        \begin{center}
-        \includegraphics[width=70mm]{../assets/scroll_position/scroll_position1.png}
-        \end{center}
-        \caption{}
-        \label{fig:one}
-    \end{minipage}
-    \begin{minipage}{0.5\hsize}
-        \begin{center}
-        \includegraphics[width=70mm]{../assets/scroll_position/scroll_position2.png}
-        \end{center}
-        \caption{}
-        \label{fig:two}
-    \end{minipage}
-\end{figure}
-
-\subsubsection{保存した動画の再生位置が復旧できることを確認}
-評価の結果、図\ref{fig:three}, 図\ref{fig:four}のように、保存した動画の再生位置が復旧することを確認できた。
-\begin{figure}[htbp]
-    \begin{minipage}{0.5\hsize}
-        \begin{center}
-        \includegraphics[width=70mm]{../assets/playback_position/playback_position1.png}
-        \end{center}
-        \caption{}
-        \label{fig:three}
-    \end{minipage}
-    \begin{minipage}{0.5\hsize}
-        \begin{center}
-        \includegraphics[width=70mm]{../assets/playback_position/playback_position2.png}
-        \end{center}
-        \caption{}
-        \label{fig:four}
-    \end{minipage}
-\end{figure}
 
 \subsection{実現できていないこと}
 一方、実現できていない点は以下である。
+\begin{itemize}
+\item 一部対応できていない動画サイトが存在する
+\end{itemize}
+
+実現できていない原因はそれぞれ以下である。
 \begin{itemize}
 \item 一部対応できていない動画サイトが存在する
 \end{itemize}
