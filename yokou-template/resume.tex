@@ -42,27 +42,50 @@ Webページおよび動画のスクロール位置や再生位置を保存・�
 iOSアプリケーションを開発する\cite{shiori-web-for-safari}。
 
 \section{先行研究}
+既存のブックマークアプリケーションとしては、
+Safariが標準で提供しているリーディングリスト、
+Pocket\cite{Pocket} 、instapaper\cite{instapaper}等が存在している。それらのアプリケーションの
+機能を表\ref{table1}にまとめた。
 
-\begin{center}
-    \scalebox{0.7}{
-    \begin{tabular}{|p{4cm}|p{2.5cm}|p{2.5cm}|p{2.5cm}|}
-    \hline
-     & safariのリーディングリスト & pocket & instapaper \\
-    \hline
-    Webページをブックマークする機能 & ◯ & ◯ & ◯ \\
-    \hline
-    動画をブックマークする機能 & ◯ & ◯ & ◯ \\
-    \hline
-    ブックマークしたWebページのスクロール位置を復旧する機能 & × & × & × \\
-    \hline
-    ブックマークした動画の再生位置を復旧する機能 & × & × & × \\
-    \hline
-    \end{tabular}
-    }
-\end{center}
+\begin{table}[t]
+    \caption{}
+    \label{table1}
+    \begin{center}
+        \scalebox{0.7}{
+        \begin{tabular}
+        {|p{4cm}|p{2.5cm}|p{2.5cm}|p{2.5cm}|}
+        \hline
+        & safariのリーディングリスト & Pocket\cite{Pocket} & instapaper\cite{instapaper} \\
+        \hline
+        Webページをブックマークする機能 & ◯ & ◯ & ◯ \\
+        \hline
+        動画をブックマークする機能 & ◯ & ◯ & ◯ \\
+        \hline
+        ブックマークしたWebページのスクロール位置を復旧する機能 & × & × & × \\
+        \hline
+        ブックマークした動画の再生位置を復旧する機能 & × & × & × \\
+        \hline
+        \end{tabular}
+        }
+    \end{center}
+\end{table}
 
 \section{アプローチ}
+\subsection{ブックマークしたWebページのスクロール位置を復旧する機能}
+ユーザーが開いているWebページのスクロール位置(縦・横)を取得する。
+ユーザーがWebページをブックマークしたとき、そのWebページのURLとともに取得した
+スクロール位置をアプリ内に保存する。
+そして、アプリ内でブックマークしたWebページを開いたタイミングで、
+取得した位置にスクロールする。
 
+\subsection{ブックマークした動画の再生位置を復旧する機能}
+ユーザーが視聴している動画の再生位置(秒単位)を取得する。
+ユーザーが動画をブックマークしたとき、その動画のURLとともに取得した
+再生位置をアプリ内に保存する。
+そして、アプリ内でブックマークした動画を開いたタイミングで、
+取得したURLから動画サイトの種類を判別する。
+動画を開く際に、クエリパラメータとして動画再生位置を指定することで、
+再生位置を復旧する。
 
 \section{環境}
 \begin{itemize}
@@ -136,17 +159,38 @@ Javascriptコードを実行し、以下の二つのデータを取得する。
 
 \section{結果}
 \subsection{実現できたこと}
+評価の結果実現できた機能を、先行研究との比較とともに表\ref{table2}にまとめた。
+\begin{table}[t]
+    \caption{}
+    \label{table2}
+    \begin{center}
+        \scalebox{0.6}{
+        \begin{tabular}
+        {|p{3cm}|p{2cm}|p{2cm}|p{2cm}|p{2cm}|}
+        \hline
+        & Shiori web & safariのリーディングリスト & Pocket\cite{Pocket} & instapaper\cite{instapaper} \\
+        \hline
+        ブックマークしたWebページのスクロール位置を復旧する機能(縦スクロール) & ◯ & × & × & × \\
+        \hline
+        ブックマークしたWebページのスクロール位置を復旧する機能(横スクロール) & ◯ & × & × & × \\
+        \hline
+        ブックマークした動画の再生位置を復旧する機能 & △ & × & × & × \\
+        \hline
+        \end{tabular}
+        }
+    \end{center}
+\end{table}
 
 \subsection{実現できていないこと}
-一方、実現できていない点は以下である。
-\begin{itemize}
-\item 一部対応できていない動画サイトが存在する
-\end{itemize}
+一方、実現できていない点とその原因は以下である。
+\subsubsection{一部対応できていない動画サイトが存在する}
+原因: 再生位置を指定して途中から動画を再生する、という機能を提供していない動画サイトがあるため。
 
-実現できていない原因はそれぞれ以下である。
-\begin{itemize}
-\item 一部対応できていない動画サイトが存在する
-\end{itemize}
+\subsubsection{埋め込み動画に対応できていない}
+原因: URLから動画サイトを判定し、各動画サイトがそれぞれ公開しているAPIのクエリパラメータの形式に合わせてリクエストを送ることで再生位置を復旧する機能を実現している。そのため、URLから動画の元サイトを判定できない埋め込み動画では、再生位置を復旧する機能が動作しない。
+
+\subsubsection{動画再生位置は秒単位にしか対応していない}
+原因: 再生位置を秒単位で取得しているため、それより細かい単位での動画再生位置復旧はできない。
 
 \bibliographystyle{junsrt}
 \bibliography{resume}
